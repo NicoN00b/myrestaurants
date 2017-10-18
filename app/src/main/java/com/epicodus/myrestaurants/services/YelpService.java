@@ -1,6 +1,9 @@
-package com.epicodus.myrestaurants;
+package com.epicodus.myrestaurants.services;
 
-import org.apache.http.protocol.HTTP;
+
+import com.epicodus.myrestaurants.Constants;
+import com.epicodus.myrestaurants.models.Restaurant;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,10 +19,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
+
 public class YelpService {
     public static void findRestaurants(String location, Callback callback) {
+
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
+
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.YELP_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter(Constants.YELP_LOCATION_QUERY_PARARMETER, location);
         String url = urlBuilder.build().toString();
@@ -59,8 +65,8 @@ public class YelpService {
                 }
 
                 ArrayList<String> categories = new ArrayList<>();
-                JSONArray categoriesJSON = restaurantJSON.getJSONObject("location")
-                        .getJSONArray("display_address");
+                JSONArray categoriesJSON = restaurantJSON.getJSONArray("categories");
+
                 for (int y = 0; y < categoriesJSON.length(); y++) {
                     categories.add(categoriesJSON.getJSONObject(y).getString("title"));
                 }
