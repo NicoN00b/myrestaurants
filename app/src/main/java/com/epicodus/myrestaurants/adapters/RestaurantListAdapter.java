@@ -2,9 +2,11 @@ package com.epicodus.myrestaurants.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.epicodus.myrestaurants.R;
 import com.epicodus.myrestaurants.models.Restaurant;
 import com.epicodus.myrestaurants.ui.RestaurantDetailActivity;
+import com.epicodus.myrestaurants.util.OnStartDragListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -50,16 +53,21 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.bindRestaurant(mRestaurants.get(position));
     }
 
+
     @Override
     public int getItemCount() {
         return mRestaurants.size();
     }
 
     public class RestaurantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @Bind(R.id.restaurantImageView) ImageView mRestaurantImageView;
-        @Bind(R.id.restaurantNameTextView) TextView mNameTextView;
-        @Bind(R.id.categoryTextView) TextView mCategoryTextView;
-        @Bind(R.id.ratingTextView) TextView mRatingTextView;
+        @Bind(R.id.restaurantImageView)
+        ImageView mRestaurantImageView;
+        @Bind(R.id.restaurantNameTextView)
+        TextView mNameTextView;
+        @Bind(R.id.categoryTextView)
+        TextView mCategoryTextView;
+        @Bind(R.id.ratingTextView)
+        TextView mRatingTextView;
 
         private Context mContext;
 
@@ -76,6 +84,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             mCategoryTextView.setText(restaurant.getCategories().get(0));
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
         }
+
         @Override
         public void onClick(View v) {
             Log.d("click listener", "working!");
